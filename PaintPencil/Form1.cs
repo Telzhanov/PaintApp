@@ -265,6 +265,43 @@ namespace PaintPencil
             currentShape = Shapes.FloodFill;
         }
 
+        private void clearToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            g.Clear(Color.White);
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog dlg = new OpenFileDialog())
+            {
+                dlg.Title = "Open Image";
+                dlg.Filter = "Images|*.png;*.bmp;*.jpg";
+
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    //paper.Image = new Bitmap(dlg.FileName);
+                    //paper.SizeMode = PictureBoxSizeMode.StretchImage;
+
+                    g.DrawImage(new Bitmap(dlg.FileName), 0, 0);
+
+                }
+            }
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                bmp.Save(sfd.FileName);
+            }
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Author:Telzhanov Askhat Created for PT2017", "About author");
+        }
+
         private void trianglebtn_Click(object sender, EventArgs e)
         {
             currentShape = Shapes.Triangle;
